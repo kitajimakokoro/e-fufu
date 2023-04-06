@@ -1,2 +1,13 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<!-- ユーザーの詳細 -->
+<h2>ユーザー詳細画面</h2>
+<div>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <p>名前 <%= @user.name %></p>
+  <p>年齢<%= @user.age %></p>
+  <p>性別<%= @user.gender %></p>
+  <p>現在の状況<%= @user.status %></p>
+  <p>自己紹介<%= @user.introduction %></p>
+   <% if @user == current_user %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+   <% end %>
+</div>

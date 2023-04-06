@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
 
-    resources :users, only:[:show] do
-      #ユーザーidが含まれたURLを生成(/user/:id/posts)
+    resources :users, only:[:show, :edit, :update] do
+      #ユーザーidが含まれた指定のURLを生成(/user/:id/posts)
       member do
         get 'posts'
         get 'comments'
@@ -30,8 +30,6 @@ Rails.application.routes.draw do
       end
       #ユーザーidなしで指定のURLを生成(/user/unsubscribe)
       collection do
-        get 'information/edit' => 'users#edit'
-        patch 'information' => 'users#update'
         get 'unsubscribe' =>'users#unsubscribe'
         patch 'withdraw' => 'users#withdraw'
       end

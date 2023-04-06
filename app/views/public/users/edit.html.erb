@@ -1,2 +1,29 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<h2>ユーザー編集画面</h2>
+<%= image_tag @user.get_profile_image(100,100) %>
+<%= form_with model: @user do |f| %>
+<div class="field">
+  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+
+  <p>ニックネーム</p>
+  <%= f.text_field :name, autofocus: true %>
+
+  <p>メールアドレス</p>
+  <%= f.text_field :email %>
+  <!-- 設定したカラム内の内容を日本語化して呼び出す。デフォルトは未公開。-->
+  <p>年齢</p>
+  <%= f.select :age, User.ages_i18n.keys.map {|k| [ User.ages_i18n[k],k,k,k,k]} %>
+
+  <p>性別</p>
+  <%= f.select :gender, User.genders_i18n.keys.map {|k| [ User.genders_i18n[k],k,k]} %>
+
+  <p>現在の状況</p>
+  <%= f.select :status, User.statuses_i18n.keys.map {|k| [ User.statuses_i18n[k],k,k,k,k]} %>
+
+  <p>自己紹介</p>
+  <%= f.text_area :introduction %>
+</div>
+<%= f.submit "変更を保存" %>
+<%= link_to "退会する", unsubscribe_users_path %>
+
+
+<% end %>
