@@ -40,9 +40,9 @@ class Public::UsersController < ApplicationController
     #ログアウト後ルートパスに遷移
     redirect_to root_path
   end
-  
+
   def user_params
     params.require(:user).permit(:name, :age, :gender, :status, :introduction, :profile_image)
   end
-  
+
 end
