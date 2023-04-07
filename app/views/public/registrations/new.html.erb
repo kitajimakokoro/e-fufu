@@ -1,54 +1,58 @@
 <div class="container">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg px-0 my-5">
-      <%= flash[:notice] %>
-      <h5 class="text-dark bg-light py-4 mb-0">新規会員登録</h2>
-        <div class="form-body p-4">
-          <div class="mx-auto text-center">
-            <p>
-              ニックネーム、メールアドレス、パスワード
-              </br>
-              を入力してください。
-            </p>
+  <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
+    <%= flash[:notice] %>
+    <h5 class="text-dark bg-light py-4 mb-0">新規会員登録</h5>
+      <div class="form-body p-5">
+        <div class="mx-auto text-center">
+          <p>
+            ニックネーム、メールアドレス、パスワード
+            </br>
+            を入力してください。
+          </p>
+        </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-user"></i>
+            </span>
           </div>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fas fa-user"></i>
-              </span>
-            </div>
-          <%= f.text_field :name, autofocus: true, placeholder: "ニックネーム（匿名ＯＫ！）", type: "text", class: "form-control" %>
+        <%= f.text_field :name, autofocus: true, placeholder: "ニックネーム", type: "text", class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", type: "text", class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", type: "text", class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-check-circle"></i>
+            </span>
+          </div>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード確認", type: "text", class: "form-control" %>
+        </div>
+        <%= f.submit "新規登録", class:"btn btn-block btn-info mt-5" %>
+        <% end %>
+      </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+  <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto text-left px-0 mt-3">
+    <p>
+      投稿やコメントには新規登録が必要です。
+      </br>
+      既に登録済みの方は  <%= link_to "こちら", new_user_session_path %>  からログインをしてください。
+    </p>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<%= render "public/shared/links" %>

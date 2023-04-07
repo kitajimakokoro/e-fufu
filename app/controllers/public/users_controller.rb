@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-  
+
   #@userでユーザーを１件取得、1行目で取得した@userのpostsで投稿を取得
   #アソシエーションをモデルに記載したからできること
   def posts
