@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 }
 
 
-
+  #URLにadminを入れる
   namespace :admin do
     root to: 'homes#top'
   end
@@ -21,19 +21,19 @@ Rails.application.routes.draw do
     root to: "homes#top"
 
     resources :users, only:[:show, :edit, :update] do
-      #ユーザーidが含まれた指定のURLを生成(/user/:id/posts)
-      member do
+      member do #ユーザーidが含まれた指定のURLを生成(/user/:id/posts)
         get 'posts'
         get 'comments'
         get 'likes'
         get 'bookmarks'
       end
-      #ユーザーidなしで指定のURLを生成(/user/unsubscribe)
-      collection do
+      collection do #ユーザーidなしで指定のURLを生成(/user/unsubscribe)
         get 'unsubscribe' =>'users#unsubscribe'
         patch 'withdraw' => 'users#withdraw'
       end
     end
+
+    resources :posts, only:[:new, :create, :index, :show, :destroy]
 
   end
 

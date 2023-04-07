@@ -1,0 +1,12 @@
+<div>
+  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
+  <p>ユーザーネーム：<%= @post.user.name %></p>
+  <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
+  <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
+  <p>投稿文：<%= @post.text %></p>
+  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+  <% if @post.user == current_user %>
+    <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+
+</div>
