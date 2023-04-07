@@ -7,6 +7,12 @@ class User < ApplicationRecord
   #アソシエーション
   has_many :posts, dependent: :destroy
 
+  #バリデーション
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :introduction, length: { maximum: 50 }
+  validates :is_deleted, inclusion: { in: [true, false] }
+
   #enum管理
   enum age: { secret: 0, twenties: 1, thirties: 2, forties: 3, fifties: 4, sixties: 5 }
   enum gender: { privacy: 0, man: 1, woman: 2, other: 3 }

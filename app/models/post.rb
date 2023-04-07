@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   #バリデーション
-  validates :text, presence: true
+  validates :text, presence: true, length: { maximum: 500 }
 
   #投稿画像用
   has_one_attached :image

@@ -1,4 +1,14 @@
 <h2>ユーザー編集画面</h2>
+
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= image_tag @user.get_profile_image(100,100) %>
 <%= form_with model: @user do |f| %>
 <div class="field">
@@ -8,7 +18,7 @@
   <%= f.text_field :name, autofocus: true %>
 
   <p>メールアドレス</p>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, placeholder: "メールアドレスを入力して下さい。" %>
   <!-- 設定したカラム内の内容を日本語化して呼び出す。デフォルトは未公開。-->
   <p>年齢</p>
   <%= f.select :age, User.ages_i18n.keys.map {|k| [ User.ages_i18n[k],k,k,k,k]} %>

@@ -4,8 +4,12 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
+  
+  #@userでユーザーを１件取得、1行目で取得した@userのpostsで投稿を取得
+  #アソシエーションをモデルに記載したからできること
   def posts
+    @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def comments
@@ -23,8 +27,11 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user)
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
   end
 
   def unsubscribe
