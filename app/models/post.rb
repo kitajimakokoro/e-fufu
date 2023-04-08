@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   #アソシエーション
   belongs_to :user
   has_many :post_comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   #バリデーション
   validates :text, presence: true, length: { maximum: 500 }
@@ -17,5 +18,12 @@ class Post < ApplicationRecord
   def get_image(width, height)
     image.variant(resize_to_limit: [width, height]).processed
   end
+
+  #いいね
+  #引数で渡されたuser.idがlikesテーブルに存在するかどうか(exists?)調べる
+  def liked_by?(user)
+    likes.exists?(user_id: user.id)
+  end
+
 
 end
