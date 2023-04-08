@@ -1,0 +1,18 @@
+<% if @user.is_deleted == false %> <!-- 退会していない時の処理 -->
+<h2><%= @comments.count %>件のコメント</h2>
+
+<% @comments.each do |post_comment| %>
+<div>
+  <%= link_to post_path(post_comment.post.id) do %>
+  <p>コメント：<%= post_comment.comment %></p>
+  <% end %>
+  <p>投稿日：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+  <% if post_comment.user == current_user %>
+    <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+</div>
+<% end %>
+
+<% else %>  <!--退会している場合の処理(is_deleted:true)-->
+ 退会済みユーザーです
+<% end %>

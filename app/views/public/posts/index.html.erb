@@ -2,11 +2,18 @@
 <h2>みんなの本音　TOP</h2>
 
 <% @posts.each do |post| %>
+<% if post.user.is_deleted == false %>
 <div>
   <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+  <p>投稿者：<%= post.user.name %></p>
   <%= link_to post_path(post.id) do %>
   <p>投稿文：<%= post.text %></p>
   <% end %>
+  <p>💬<%= post.post_comments.count %></p>
   <p>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
 </div>
+<% else %>  <!--退会している場合の処理(is_deleted:true)-->
+  <!--投稿自体を表示しない-->
 <% end %>
+<% end %>
+

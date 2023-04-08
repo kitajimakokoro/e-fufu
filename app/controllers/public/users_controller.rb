@@ -13,6 +13,8 @@ class Public::UsersController < ApplicationController
   end
 
   def comments
+    @user = User.find(params[:id])
+    @comments = @user.post_comments
   end
 
   def likes
@@ -23,6 +25,11 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+      if @user == current_user
+        render "edit"
+      else
+        redirect_to user_path(current_user)
+      end
   end
 
   def update
@@ -49,7 +56,7 @@ class Public::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :age, :gender, :status, :introduction, :profile_image)
+    params.require(:user).permit(:name, :email, :age, :gender, :status, :introduction, :profile_image)
   end
 
 end

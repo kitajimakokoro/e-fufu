@@ -33,8 +33,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :posts, only:[:new, :create, :index, :show, :destroy]
-
+    #postcomment,like,bookmarkはネストしたURLを生成しparams[:post_id]で拾えるようにする
+    resources :posts, only:[:new, :create, :index, :show, :destroy] do
+       resources :post_comments, only: [:create, :destroy]
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   #アソシエーション
   belongs_to :user
+  has_many :post_comments, dependent: :destroy
 
   #バリデーション
   validates :text, presence: true, length: { maximum: 500 }
