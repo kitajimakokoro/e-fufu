@@ -3,22 +3,24 @@ class Public::LikesController < ApplicationController
    def create
     #➀まずPostモデルから投稿データを１件取得
     post = Post.find(params[:post_id])
-    #➁pst_idカラムに➀で取得したpostのidを渡しこれをパラメーターとして取得
+    #➁post_idカラムに➀で取得したpostのidを渡しこれをパラメーターとして取得
     like = Like.new(post_id: post.id)
     #➂いいねのuser.idには現在ログイン中のユーザーのuser.idを指定
     like.user_id = current_user.id
-    favorite.save
-    redirect_to post_image_path(post_image)
-
-    #記載途中！！！
-
+    like.save
+    #元のページにリダイレクト
+    redirect_to request.referer
   end
 
   def destroy
-    post_image = PostImage.find(params[:post_image_id])
-    favorite = current_user.favorites.find_by(post_image_id: post_image.id)
-    favorite.destroy
-    redirect_to post_image_path(post_image)
+    #➀まずPostモデルから投稿データを１件取得
+    post = Post.find(params[:post_id])
+    #➁post_idカラムにはcreateで格納されたpost.idのデータ、user_idには現在ログイン中のユーザーのidを指定
+    like = Like.find_by(post_id: post.id, user_id: current_user.id)
+    #➂いいねを外す
+    like.destroy
+    #元のページにリダイレクト
+    redirect_to request.referer
   end
 
 end

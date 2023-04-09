@@ -18,6 +18,12 @@ class Public::UsersController < ApplicationController
   end
 
   def likes
+    @user = User.find(params[:id])
+    #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルのpost_idも持ってくる
+    #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
+    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    #上記の投稿を引数としてPostモデルから投稿を取得
+    @like_posts = Post.find(likes)
   end
 
   def bookmarks

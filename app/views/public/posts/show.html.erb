@@ -2,6 +2,23 @@
   <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+
+  <!--  ここからいいね機能  -->
+  <!--  投稿画像に付けられたいいねに、ログインしているユーザーが含まれているか  -->
+    <% if @post.liked_by?(current_user) %>
+    <p><!--  含まれている時いいねを外す  -->
+      <%= link_to post_likes_path(@post), method: :delete do %>
+        <span style="color:red;">❤︎</span><%= @post.likes.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p><!--  含まれている時いいねをする  -->
+      <%= link_to post_likes_path(@post), method: :post do %>
+        <span>♡</span><%= @post.likes.count %>
+      <% end %>
+    </p>
+  <% end %>
+
   <p>💬<%= @post.post_comments.count %></p>
   <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
   <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>

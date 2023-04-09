@@ -9,6 +9,19 @@
   <%= link_to post_path(post.id) do %>
   <p>投稿文：<%= post.text %></p>
   <% end %>
+    <% if post.liked_by?(current_user) %>
+    <p><!--  含まれている時いいねを外す  -->
+      <%= link_to post_likes_path(post), method: :delete do %>
+        <span style="color:red;">❤︎</span><%= post.likes.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p><!--  含まれている時いいねをする  -->
+      <%= link_to post_likes_path(post), method: :post do %>
+        <span>♡</span><%= post.likes.count %>
+      <% end %>
+    </p>
+  <% end %>
   <p>💬<%= post.post_comments.count %></p>
   <p>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
 </div>

@@ -1,13 +1,26 @@
 <% if @user.is_deleted == false %> <!-- 退会していない時の処理 -->
-<h2><%= @posts.count %>件の投稿</h2>
+<h2><%= @likes.count %>件の投稿</h2>
 
-<% @posts.each do |post| %>
+<% @likes.each do |like| %>
 <div>
-  <%= link_to post_path(post.id) do %>
+  <%= link_to post_path(like.id) do %>
   <p>投稿文：<%= post.text %></p>
   <% end %>
   <p>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
-  <p>コメント件数：<%= post.post_comments.count %></p>
+  <p>💬<%= post.post_comments.count %></p>
+    <% if post.liked_by?(current_user) %>
+    <p><!--  含まれている時いいねを外す  -->
+      <%= link_to post_likes_path(post), method: :delete do %>
+        <span style="color:red;">❤︎</span><%= post.likes.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p><!--  含まれている時いいねをする  -->
+      <%= link_to post_likes_path(post), method: :post do %>
+        <span>♡</span><%= post.likes.count %>
+      <% end %>
+    </p>
+  <% end %>
   <% if post.user == current_user %>
     <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
