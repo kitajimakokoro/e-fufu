@@ -1,18 +1,13 @@
 <h1>投稿フォーム</h1>
 
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
   <%= form_with model: @post do |f| %>
+  <h4>カテゴリ</h4>
+  <!--  保存カラム(category_id),保存する対象カテゴリすべて(Category.all)保存する参照先カラム(カテゴリID,カテゴリ名) -->
+  <%= f.collection_select :category_id,Category.all, :id, :name, include_blank: "--選択してください--", class: "col-7 form-control" %>
     <h4>画像</h4>
       <%= f.file_field :image, accept: "image/*" %>
     <h4>内容</h4>
       <%= f.text_area :text %>
     <%= f.submit '投稿する' %>
   <% end %>
+

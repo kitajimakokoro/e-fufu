@@ -10,4 +10,30 @@
 Admin.create!(
   email: "e-fufu@example.com",
   password: "e-fufu"
+)
+
+#開発終わったら消す
+(1..10).each do |n|
+  User.create!(
+      name: "user#{n}",
+      email: "user#{n}@test.com",
+      password: "password"
+    )
+end
+
+#初期状態でのカテゴリを追加
+categories = %w(
+    家事
+    育児/妊活
+    お金事情
+    夜の生活
+    スキンシップ
+    結婚
+    惚気話
+    お悩み相談
+    パートナーへ
   )
+
+categories.each do |name|
+  Category.create!(name: name)
+end

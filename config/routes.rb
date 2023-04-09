@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   #URLにadminを入れる
   namespace :admin do
     root to: 'homes#top'
+    resources :categories, only: [:index, :create ]
   end
 
   #publicをURLから抜く

@@ -1,11 +1,21 @@
-<%= flash[:notice] %>
 <h2>みんなの本音　TOP</h2>
+
+<h3 class="side-title">カテゴリー</h3>
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <!--  post_path(投稿一覧ページ)のカテゴリIDには取得したカテゴリIDを渡す  -->
+        <%= link_to category.name, posts_path(category_id: category.id) %>
+      </li>
+    <% end %>
+  </ul>
 
 <% @posts.each do |post| %>
 <% if post.user.is_deleted == false %>
 <div>
   <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
   <p>投稿者：<%= post.user.name %></p>
+  <p>カテゴリ名：<%= post.category.name %>
   <%= link_to post_path(post.id) do %>
   <p>投稿文：<%= post.text %></p>
   <% end %>

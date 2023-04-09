@@ -2,6 +2,8 @@
   <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+  <p>カテゴリ名：<%= @post.category.name %>
+
 
   <!--  ここからいいね機能  -->
   <!--  投稿画像に付けられたいいねに、ログインしているユーザーが含まれているか  -->

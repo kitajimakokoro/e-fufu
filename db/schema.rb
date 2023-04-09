@@ -59,6 +59,12 @@ ActiveRecord::Schema.define(version: 2023_04_09_050942) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -76,6 +82,7 @@ ActiveRecord::Schema.define(version: 2023_04_09_050942) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "category_id", null: false
     t.text "text", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
