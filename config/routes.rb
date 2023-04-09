@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :posts, only:[:new, :create, :index, :show, :destroy] do
        resources :post_comments, only: [:create, :destroy]
        resource :likes, only: [:create, :destroy] #いいねの:idは不要なため単数形で含まない
+       resource :bookmarks, only: [:create, :destroy] #ブックマークの:idは不要なため単数形で含まない
     end
   end
 

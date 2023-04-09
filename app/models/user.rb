@@ -8,9 +8,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   #バリデーション
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 15 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
   validates :is_deleted, inclusion: { in: [true, false] }

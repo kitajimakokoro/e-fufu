@@ -26,6 +26,7 @@
   <%end %>
    <% if @user == current_user %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <p><%= link_to "ブックマーク", bookmarks_user_path %><p>
    <% end %>
 
 </div>

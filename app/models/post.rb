@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   #バリデーション
   validates :text, presence: true, length: { maximum: 500 }
@@ -25,5 +26,10 @@ class Post < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
+  #ブックマーク
+  #引数で渡されたuser.idがbookmarksテーブルに存在するかどうか(exists?)調べる
+  def bookmarked_by?(user)
+    bookmarks.exists?(user_id: user.id)
+  end
 
 end

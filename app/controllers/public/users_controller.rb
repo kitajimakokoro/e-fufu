@@ -21,12 +21,23 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルのpost_idも持ってくる
     #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
-    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    like = Like.where(user_id: @user.id).pluck(:post_id)
     #上記の投稿を引数としてPostモデルから投稿を取得
-    @like_posts = Post.find(likes)
+    @like_posts = Post.find(like)
   end
 
   def bookmarks
+    @user = User.find(params[:id])
+    #Bookmarkモデルのuser_idは上記で取得したユーザーのid＋Bookmarkモデルのpost_idも持ってくる
+    #bookmarkの中身はあるユーザー(user_id)がブックマークした投稿(post_id)
+    bookmark = Bookmark.where(user_id: @user.id).pluck(:post_id)
+    #上記の投稿を引数としてPostモデルから投稿を取得
+    @bookmark_posts = Post.find(bookmark)
+    if @user == current_user
+       render "bookmarks"
+    else
+       redirect_to user_path(current_user)
+    end
   end
 
   def edit

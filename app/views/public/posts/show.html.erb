@@ -20,6 +20,23 @@
   <% end %>
 
   <p>💬<%= @post.post_comments.count %></p>
+
+    <!--  ここからブックマーク機能  -->
+  <!--  投稿画像に付けられたブックマークに、ログインしているユーザーが含まれているか  -->
+    <% if @post.bookmarked_by?(current_user) %>
+    <p><!--  含まれている時ブックマークを外す  -->
+      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        <span>★︎</span>
+      <% end %>
+    </p>
+    <% else %>
+    <p><!--  含まれている時いいねをする  -->
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        <span>☆</span>
+      <% end %>
+    </p>
+  <% end %>
+
   <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
   <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
   <p>投稿文：<%= @post.text %></p>
