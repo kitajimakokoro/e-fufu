@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+  #ゲストユーザーはプロフィール編集画面に遷移できない。
+  before_action :ensure_guest_user, only: [:edit]
 
 
   def show
@@ -71,9 +73,20 @@ class Public::UsersController < ApplicationController
     #ログアウト後ルートパスに遷移
     redirect_to root_path
   end
+ 
+  
+  private
 
   def user_params
     params.require(:user).permit(:name, :email, :age, :gender, :status, :introduction, :profile_image)
   end
+  
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィールを編集できません。'
+    end
+  end  
+  
 
 end

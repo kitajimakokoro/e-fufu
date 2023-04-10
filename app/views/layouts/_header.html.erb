@@ -1,0 +1,30 @@
+     <header>
+    <% if admin_signed_in? %>
+    <li>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced;" %>
+      </li>
+    <% elsif user_signed_in? %>
+      <li>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "マイページ", user_path(current_user), class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced" %>
+      </li>
+        <li class="nav-item">
+        <%= link_to "TOPページ", posts_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced" %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "新規登録", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_user_session_path %>
+      </li>
+      <div class="row">
+        <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+      </div>
+    <% end %>
+  </header>

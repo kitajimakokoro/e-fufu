@@ -4,6 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #ゲストログイン用
+  def self.guest
+    #()内の条件を条件としたデータが存在すればそのデータを返す、なければ新規作成
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      #パスワードはランダムな文字列を生成
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+    end
+  end
+
   #アソシエーション
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy

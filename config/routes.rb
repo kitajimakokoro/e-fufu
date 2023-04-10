@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
 }
 
+  #ゲストユーザーログイン用
+  devise_scope :user do #deviseに新しいルーティングを追加したいためscopeを使用
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
 
   #URLにadminを入れる
   namespace :admin do
