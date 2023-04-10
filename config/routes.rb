@@ -40,9 +40,12 @@ Rails.application.routes.draw do
 
     #postcomment,like,bookmarkはネストしたURLを生成しparams[:post_id]で拾えるようにする
     resources :posts, only:[:new, :create, :index, :show, :destroy] do
-       resources :post_comments, only: [:create, :destroy]
-       resource :likes, only: [:create, :destroy] #いいねの:idは不要なため単数形で含まない
-       resource :bookmarks, only: [:create, :destroy] #ブックマークの:idは不要なため単数形で含まない
+        resources :post_comments, only: [:create, :destroy]
+        resource :likes, only: [:create, :destroy] #いいねの:idは不要なため単数形で含まない
+        resource :bookmarks, only: [:create, :destroy] #ブックマークの:idは不要なため単数形で含まない
+      collection do
+        get 'search'
+      end
     end
   end
 

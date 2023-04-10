@@ -43,6 +43,19 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def search
+    #入力した検索ワードをparams[:keyword]で取得、presentは存在を問う
+    if params[:keyword].present?
+      #入力したキーワードで検索し、text内にそのキーワードが含まれたものをすべて取得
+      @posts = Post.where('text LIKE ?', "%#{params[:keyword]}%")
+      #入力した検索ワードを取得して検索結果画面を表示する
+      @keyword = params[:keyword]
+    else
+      #present?で確認し何も入力されていなければ投稿一覧画面にリダイレクトする
+      redirect_to posts_path
+    end
+  end
+
   private
 
   def post_params

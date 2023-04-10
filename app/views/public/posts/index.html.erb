@@ -9,6 +9,16 @@
       </li>
     <% end %>
   </ul>
+  
+        <!--検索窓） -->
+      <div class="search_form">
+          <%= form_with url: search_posts_path, local:true, method: :get do |f| %>
+            <div class="input-group mb-3">
+              <%= f.text_field :keyword, class: "form-control search-control mr-1", placeholder: "Search..." %>
+              <%= button_tag type: "submit", class: "btn btn-light " do %>
+                <i class="fas fa-search"></i>
+              <% end %>
+          <% end %>
 
 <% @posts.each do |post| %>
 <% if post.user.is_deleted == false %>
