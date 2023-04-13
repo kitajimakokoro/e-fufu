@@ -16,8 +16,6 @@
     <p><%= @post.post_comments.count %>件のコメント</p>
   <!--  @postに格納した投稿データに紐づくpost_comments(モデル)の情報を呼び出しpost_commentに格納  -->
   <% @post.post_comments.each do |post_comment| %>
-  <!--  post_commentに紐づいたuser(モデル)のプロフィール画像 -->
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
   <!--  post_commentに紐づいたuser(モデル)の名前 -->
     <p><%= post_comment.user.name %></p>
     <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
@@ -25,4 +23,3 @@
       <%= link_to "削除", admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% end %>
 </div>
-

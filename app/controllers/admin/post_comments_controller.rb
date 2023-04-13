@@ -2,7 +2,12 @@ class Admin::PostCommentsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @comments = PostComment.all
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @comments = @user.post_comments
+    else
+      @comments = PostComment.all
+    end
   end
 
   def destroy

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   #URLにadminを入れる
   namespace :admin do
+    get 'users/:user_id/posts' => 'posts#index', as: 'users_posts'
+    get 'users/:user_id/post_comments' => 'post_comments#index', as: 'users_post_comments'
     resources :categories, only: [:index, :create ]
     resources :users, only: [:index, :show, :update ]
     resources :post_comments, only: [:index]

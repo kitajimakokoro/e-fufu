@@ -1,8 +1,17 @@
-
-<h2><%= @comments.count %>件のコメント</h2>
+<div class="container add-font">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h4 class="my-4">
+        <% if params[:user_id] %>
+        <mark class="bg-light"><%= @user.name %>さんのコメント履歴一覧</mark>
+        <% else %>
+        <mark class="bg-light">コメント履歴一覧</mark>
+        <% end %>
+        </h4>
 
 <% @comments.each do |post_comment| %>
 <div>
+  <p>投稿者：<%= post_comment.user.name %></p>
   <%= link_to admin_post_path(post_comment.post.id) do %>
   <p>コメント：<%= post_comment.comment %></p>
   <% end %>
@@ -10,3 +19,6 @@
     <%= link_to "削除", admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 </div>
 <% end %>
+    </div>
+  </div>
+  </div>

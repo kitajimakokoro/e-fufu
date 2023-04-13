@@ -51,10 +51,10 @@
             <% end %>
             <div class="col-auto d-flex pl-0">
               <div class="col-auto justify-content-start pl-0">
-                <%=link_to  "投稿履歴一覧を見る", admin_user_path(@user) ,class: "btn btn-primary" %>
+                <%=link_to  "投稿履歴一覧を見る", admin_users_posts_path(@user) ,class: "btn btn-primary" %>
               </div>
               <div class="col-auto justify-content-start pl-0">
-                <%=link_to  "コメント履歴一覧を見る", admin_user_path(@user) ,class: "btn btn-primary" %>
+                <%=link_to  "コメント履歴一覧を見る",  admin_users_post_comments_path(@user) ,class: "btn btn-primary" %>
               </div>
             </div>
           </div>
