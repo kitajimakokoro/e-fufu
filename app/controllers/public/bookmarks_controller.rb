@@ -1,4 +1,6 @@
 class Public::BookmarksController < ApplicationController
+  
+  before_action :authenticate_user!
 
   def create
     #➀まずPostモデルから投稿データを１件取得

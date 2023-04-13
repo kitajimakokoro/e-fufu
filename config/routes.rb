@@ -17,8 +17,12 @@ Rails.application.routes.draw do
 
   #URLにadminを入れる
   namespace :admin do
-    root to: 'homes#top'
     resources :categories, only: [:index, :create ]
+    resources :users, only: [:index, :show, :update ]
+    resources :post_comments, only: [:index]
+    resources :posts, only: [:index, :show, :destroy ] do
+      resources :post_comments, only: [:destroy]
+    end
   end
 
   #publicをURLから抜く

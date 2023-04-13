@@ -19,7 +19,7 @@
  <% else %>
   <p>現在の状況<%= @user.status_i18n %></p>
   <%end %>
-  <% if @user.status.nil?  %>
+  <% if @user.introduction.nil?  %>
   <p>自己紹介： 未設定</p>
   <% else %>
   <p>自己紹介<%= @user.introduction %></p>

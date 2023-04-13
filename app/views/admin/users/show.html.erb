@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h4 class="my-4"><mark class="bg-light"><%= @user.name %>さんの会員詳細</mark></h4>
+        <div class="col-md-9 d-flex pl-0 font-weight-bold">
+          <div class="col-auto pl-0">
+            <p>プロフィール画像</p>
+            <p>ニックネーム</p>
+            <p>メールアドレス</p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p>会員ステータス</p>
+            <p>自己紹介</p>
+          </div>
+          <div class="col-auto">
+            <p><%= image_tag @user.get_profile_image(100,100) %></p>
+            <p><%= @user.name %></p>
+            <p><%= @user.email %></p>
+
+            <% if @user.age.nil?  %>
+            <p>年齢： 未設定</p>
+            <% else %>
+            <p><%= @user.age_i18n %></p>
+            <%end %>
+
+            <% if @user.gender.nil?  %>
+               <p>性別： 未設定</p>
+            <% else %>
+            <p><%= @user.gender_i18n %></p>
+            <%end %>
+
+            <% if @user.status.nil?  %>
+              <p>交際ステータス： 未設定</p>
+             <% else %>
+            <p><%= @user.status_i18n %></p>
+            <%end %>
+
+            <% if @user.introduction.nil?  %>
+              <p>自己紹介： 未設定</p>
+            <% else %>
+            <p><%= @user.introduction %></p>
+            <%end %>
+
+            <%= form_with model: @user, url: admin_user_path do |f| %>
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted_false, "有効", class:"mr-3" %>
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted_true, "退会 / 利用停止" %>
+            <%= f.submit "会員ステータスの変更を保存する" ,class: "btn btn-success" %>
+            <% end %>
+            <div class="col-auto d-flex pl-0">
+              <div class="col-auto justify-content-start pl-0">
+                <%=link_to  "投稿履歴一覧を見る", admin_user_path(@user) ,class: "btn btn-primary" %>
+              </div>
+              <div class="col-auto justify-content-start pl-0">
+                <%=link_to  "コメント履歴一覧を見る", admin_user_path(@user) ,class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

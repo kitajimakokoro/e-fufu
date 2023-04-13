@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
   #ゲストユーザーはプロフィール編集画面に遷移できない。
   before_action :ensure_guest_user, only: [:edit]
 
@@ -78,7 +79,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :age, :gender, :status, :introduction, :profile_image)
+    params.require(:user).permit(:name, :email, :age, :gender, :status, :introduction, :profile_image, :is_deleted)
   end
 
   def ensure_guest_user
