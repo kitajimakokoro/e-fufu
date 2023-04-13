@@ -1,39 +1,83 @@
-     <header>
-    <% if admin_signed_in? %>
-    <li>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "投稿履歴一覧", admin_posts_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "会員一覧", admin_users_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "コメント履歴一覧", admin_post_comments_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced;" %>
-      </li>
-    <% elsif user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "マイページ", user_path(current_user), class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced" %>
-      </li>
-        <li class="nav-item">
-        <%= link_to "TOPページ", posts_path, class: 'nav-link btn pr-1 pl-1 ml-4', :style=>"background-color:#fcfced" %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-      <div class="row">
-        <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+<header class="shadow-lg" style="background-color: #BC8F8F">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand pr-3" href="/"><%= image_tag('header_logo.png', class: "img-fluid pr-3", width: 300 ) %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to admin_users_path, class: "nav-link text-white" do %>
+              <i class="fas fa-users"></i>
+              会員一覧　|
+            <% end %>
+          <li class="nav-item">
+            <%= link_to admin_posts_path, class: "nav-link text-white" do %>
+              <i class="fas fa-memory"></i>
+              投稿履歴　|
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_post_comments_path, class: "nav-link text-white" do %>
+              <i class="fas fa-comments"></i>
+              コメント履歴 ｜
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_categories_path, class: "nav-link text-white" do %>
+              <i class="fas fa-tags"></i>
+              カテゴリ　|
+            <% end %>
+          </li>
+          </li>
+            <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-white" do %>
+              <i class="fas fa-sign-out-alt"></i>
+              ログアウト
+            <% end %>
+          </li>
+        <% elsif user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to posts_path, class: "nav-link text-white" do %>
+              <i class="fas fa-pager"></i>
+              TOPページ
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to user_path(current_user), class: "nav-link text-white" do %>
+              <i class="fas fa-user"></i>
+              マイページ
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-white" do %>
+              <i class="fas fa-sign-out-alt"></i>
+              ログアウト
+            <% end %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to new_user_registration_path, class: "nav-link text-white" do %>
+              <i class="fas fa-user-plus"></i>
+              新規登録
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_user_session_path, class: "nav-link text-white" do %>
+              <i class="fas fa-sign-in-alt"></i>
+              ログイン
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_guest_sign_in_path, method: :post, class: "nav-link text-white" do %>
+              <i class="fas fa-user-check"></i>
+              ゲストログイン
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
       </div>
-    <% end %>
-  </header>
+    </div>
+  </nav>
+</header>
