@@ -1,13 +1,41 @@
-<h1>投稿フォーム</h1>
-
-  <%= form_with model: @post do |f| %>
-  <h4>カテゴリ</h4>
-  <!--  保存カラム(category_id),保存する対象カテゴリすべて(Category.all)保存する参照先カラム(カテゴリID,カテゴリ名) -->
-  <%= f.collection_select :category_id,Category.all, :id, :name, include_blank: "--選択してください--", class: "col-7 form-control" %>
-    <h4>画像</h4>
-      <%= f.file_field :image, accept: "image/*" %>
-    <h4>内容</h4>
-      <%= f.text_area :text %>
-    <%= f.submit '投稿する' %>
-  <% end %>
+<div class="container">
+  <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
+    <h5 class=" py-4 mb-0", style="color:#FFFFFF; background-color:#696969;">
+      <strong>
+      投稿フォーム
+      </strong>
+    </h5>
+      <div class="form-body p-4 mt-4">
+        <%= form_with model: @post do |f| %>
+        <div class="form-group">
+          <h6 class="col-md-6 p-0 text-left">
+            <i class="fas fa-tag"></i>
+            カテゴリ
+          </h6>
+          <!--  保存カラム(category_id),保存する対象カテゴリすべて(Category.all)保存する参照先カラム(カテゴリID,カテゴリ名) -->
+          <%= f.collection_select :category_id,Category.all, :id, :name, { prompt: '【必須】選択してください' }, autocomplete: "prefecture_code",  class:"form-control form-control-sm mb-4" %>
+        </div>
+        <div class="input-group mb-3">
+          <h6 class="col-md-12 p-0 text-left">
+            <i class="fas fa-file-image"></i>
+            ファイル添付
+          </h6>
+          <div class="custom-file">
+            <%= f.file_field :image, accept: "image/*", class: "custom-file-input", id: "inputFile" %>
+            <label class="custom-file-label text-left" for="inputFile" data-browse="参照">ファイルを選択</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <h6 class="col-md-6 p-0 text-left">
+            <i class="fas fa-pen"></i>
+            内容
+          </h6>
+          <%= f.text_area :text, placeholder: "【必須】内容を入力（500文字以内）", rows: 6, class:"form-control form-control-sm mb-4" %>
+        </div>
+        <hr>
+        <%= f.submit "投稿する", class: "btn btn-block mt-4", style:"color:#FFFFFF; background-color:#696969;" %>
+        <% end %>
+      </div>
+  </div>
+</div>
 

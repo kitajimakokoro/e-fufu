@@ -1,7 +1,11 @@
 <div class="container">
   <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
     <%= flash[:notice] %>
-    <h5 class="text-dark bg-light py-4 mb-0">ログイン</h5>
+    <h5 class="py-4 mb-0", style="color:#FFFFFF; background-color:#696969;">
+      <strong>
+      ログイン
+      </strong>
+    </h5>
       <div class="form-body p-5">
         <div class="mx-auto text-center">
           <p>
@@ -27,7 +31,7 @@
           </div>
         <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", type: "password", class: "form-control" %>
         </div>
-        <%= f.submit "ログイン", class:"btn btn-block btn-info mt-5" %>
+        <%= f.submit "ログイン", class: "btn btn-block mt-5", style:"color:#FFFFFF; background-color:#696969;" %>
         <% end %>
       </div>
   </div>
