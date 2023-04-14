@@ -1,12 +1,32 @@
-<h2>退会フォーム</h2>
-
-<h1>本当に退会しますか？</h1>
- <p>
-   退会すると以下の情報が完全に消去され復元することはできなくなります。<br>
-   ・自分の投稿やコメント<br>
-   ・マイページの内容<br>
-   ・いいねやブックマークをした投稿<br>
-   退会を希望する場合は、「退会する」のボタンをクリックしてください
- </p>
-  <%= link_to "退会する", withdraw_users_path, method: :patch %>
-  <%= link_to "編集ページに戻る", edit_user_path(current_user) %>
+<div class="container">
+  <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
+    <h5 class="py-4 mb-0", style="color:#FFFFFF; background-color:#8B0000;">
+      <strong>
+      退会フォーム
+      </strong>
+    </h5>
+      <div class="form-body p-5">
+        <div class="mx-auto text-center">
+          <h2><strong>本当に退会しますか？</strong></h2>
+          <p class="mb-4">
+            <br>
+            退会すると以下の情報が完全に消去され<br>復元することはできなくなります。<br>
+            <br>
+            ・自分の投稿やコメント<br>
+            ・マイページの内容<br>
+            ・いいねやブックマークをした投稿<br>
+            <br>
+            退会を希望する場合は、<br>「退会する」のボタンをクリックしてください。
+          </p>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-mb-6 mb-2 mx-3">
+            <%= link_to "編集ページに戻る", edit_user_path(current_user), class: 'btn btn-outline-secondary' %>
+          </div>
+          <div class="col-mb-6 text-center mx-3">
+            <%= link_to "　　退会する　　", withdraw_users_path, method: :patch, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
