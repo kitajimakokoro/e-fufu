@@ -56,7 +56,7 @@
           <div class="comments card-text">
             <h5 class="pl-2"><%= @post.post_comments.count %>件のコメント</h5>
             <!--  コメント一覧  -->
-            <%= render 'public/post_comments/comment_list', post: @post %>
+            <%= render 'public/post_comments/comments', post: @post %>
           </div>
         </div>
       </div>
