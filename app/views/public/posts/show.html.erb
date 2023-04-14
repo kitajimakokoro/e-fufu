@@ -1,80 +1,129 @@
-<div>
-  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <p>カテゴリ名：<%= @post.category.name %>
+<div class="container px-3 px-sm-0">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card mt-4 shadow-sm">
+    <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
+    <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
+    <div class="card-body">
+      <div class="row">
+      <div class="col-2">
+        <%= image_tag @post.user.get_profile_image(70,70), class:"rounded-circle" %>
+        </div>
+        <div class="col-10">
+          <p class="m-0 mt-2 pb-1">
+          <%= link_to user_path(@post.user), class:"text-reset", style:"text-decoration: black underline" do %>
+          <%= @post.user.name %>
+          <% end %>
+          </p>
+        <span>
 
 
+
+ <%= @post.created_at.strftime('%Y/%m/%d') %>｜
   <!--  ここからいいね機能  -->
   <!--  投稿画像に付けられたいいねに、ログインしているユーザーが含まれているか  -->
     <% if @post.liked_by?(current_user) %>
-    <p><!--  含まれている時いいねを外す  -->
-      <%= link_to post_likes_path(@post), method: :delete do %>
-        <span style="color:red;">❤︎</span><%= @post.likes.count %>
+   <!--  含まれている時いいねを外す  -->
+      <%= link_to post_likes_path(@post), method: :delete, class:"text-reset text-decoration-none" do %>
+        <i class="fas fa-heart" style="color: #DB7093;"></i>
+        <%= @post.likes.count %>｜
       <% end %>
-    </p>
     <% else %>
-    <p><!--  含まれている時いいねをする  -->
-      <%= link_to post_likes_path(@post), method: :post do %>
-        <span>♡</span><%= @post.likes.count %>
+    <!--  含まれている時いいねをする  -->
+      <%= link_to post_likes_path(@post), method: :post, class:"text-reset text-decoration-none" do %>
+        <i class="far fa-heart" style="color:#A9A9A9"></i>
+        <%= @post.likes.count %>｜
       <% end %>
-    </p>
-  <% end %>
 
-  <p>💬<%= @post.post_comments.count %></p>
+  <% end %>
+  <i class="fas fa-comment" style="color:#A9A9A9"></i>
+  <%= @post.post_comments.count %>｜
 
     <!--  ここからブックマーク機能  -->
   <!--  投稿画像に付けられたブックマークに、ログインしているユーザーが含まれているか  -->
     <% if @post.bookmarked_by?(current_user) %>
-    <p><!--  含まれている時ブックマークを外す  -->
-      <%= link_to post_bookmarks_path(@post), method: :delete do %>
-        <span>★︎</span>
+    <!--  含まれている時ブックマークを外す  -->
+      <%= link_to post_bookmarks_path(@post), method: :delete, class:"text-reset text-decoration-none" do %>
+        <i class="fas fa-bookmark" style="color:#FF8C00"></i>｜
       <% end %>
-    </p>
+
     <% else %>
-    <p><!--  含まれている時いいねをする  -->
-      <%= link_to post_bookmarks_path(@post), method: :post do %>
-        <span>☆</span>
+    <!--  含まれている時ブックマークをする  -->
+      <%= link_to post_bookmarks_path(@post), method: :post, class:"text-reset text-decoration-none" do %>
+        <i class="far fa-bookmark" style="color:#A9A9A9"></i>｜
       <% end %>
-    </p>
-  <% end %>
 
-  <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
-  <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
-  <p>投稿文：<%= @post.text %></p>
-  <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
+    <% if @post.user == current_user %>
+    <%= link_to post_path(@post), method: :delete, "data-confirm" => "この投稿を削除しますか？", class:"text-reset text-decoration-none text-left" do %>
+    <i class="fas fa-trash-alt" style="color:#B22222"></i>
+    <% end %>
+  <% end %>
+  </span>
+  </div>
+  </div>
+  <hr>
 
+      <div class="row">
+      <div class="col-12">
+        <div class="h5 mb-2 p-2">
+        <strong><i class="fas fa-tag"></i>
+        <%= @post.category.name %></strong>
+        </div>
+  <p class="pl-2"><%= @post.text %></p>
 </div>
+</div>
+<hr>
 
-<div>
-  <p>コメントする</p>
+<div class="new-comment card-text">
+  <div class="form-group">
   <!--  コメントはPostモデルに紐づいたpost_commentである＋ルーティングをネストしているためインスタンス変数を２つ指定 -->
   <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力（200文字以内）" %>
-    <%= f.submit "コメントする" %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力（200文字以内）", class:"form-control" %>
+    <div class="text-right">
+    <%= f.submit "コメントする", class: "btn mt-2", style:"color:#FFFFFF; background-color:#696969" %>
+    </div>
   <% end %>
+</div>
+<hr>
 </div>
 
 
-<div>
-    <p><%= @post.post_comments.count %>件のコメント</p>
+<div class="comments card-text">
+    <h5 class="pl-2"><%= @post.post_comments.count %>件のコメント</h5>
+
   <!--  @postに格納した投稿データに紐づくpost_comments(モデル)の情報を呼び出しpost_commentに格納  -->
   <% @post.post_comments.each do |post_comment| %>
   <% if post_comment.user.is_deleted == false %>
-  <!--  post_commentに紐づいたuser(モデル)のプロフィール画像 -->
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+     <div class="media border mb-3 ">
+<div class="h6 col-12 p-2">
   <!--  post_commentに紐づいたuser(モデル)の名前 -->
-    <p><%= post_comment.user.name %></p>
-    <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-    <p><%= post_comment.comment %></p>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <%= link_to user_path(post_comment.user), class:"text-reset", style:"text-decoration: black underline" do %>
+      <%= post_comment.user.name %>
+      <% end %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d')%>
+        <span class="text-right">
+          <% if post_comment.user == current_user %>
+      <%= link_to post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "このコメントを削除しますか？", class:"text-reset text-decoration-none text-left" do %>
+      <i class="fas fa-trash-alt" style="color:#B22222"></i>
     <% end %>
-</div>
+    <% end %>
+    </span>
+    <p class="mt-3 m-0">
+      <%= post_comment.comment %>
+      </p>
+      </div>
+      </div>
   <% else %>  <!--退会している場合の処理(is_deleted:true)-->
+  <div class="media border mb-3 ">
   【退会済ユーザー】このコメントは削除されました。
+  </div>
 <% end %>
 <% end %>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 
