@@ -1,0 +1,44 @@
+<div class="px-3 px-sm-0 p-4" style="background-color: #DCDCDC">
+  <div class="row">
+    <div class="col-lg-5 col-sm-12 text-center text-lg-right">
+        <%= image_tag user.get_profile_image(230,230), class:"rounded-circle" %>
+    </div>
+    <div class="col-lg-7">
+      <div class="row">
+        <div class="col-lg-6 mt-2 p-0 h2">
+          <strong><%= user.name %></strong>
+        </div>
+        <div class="col-lg-5 text-left d-flex justify-content-lg-start justify-content-end mt-3 ">
+          <!--ログイン中のユーザー(マイページ）のみブックマークを表示)-->
+          <% if user == current_user %>
+            <p>
+              <%= link_to  bookmarks_user_path, class:"btn-lg" do %>
+                <i class="fas fa-bookmark" style="color: #D2691E;"></i>
+              <% end %>
+            </p>
+          <% end %>
+          <!--guestuserの場合プロフィール編集リンクを表示させない-->
+          <% if user.name != "guestuser" %>
+            <p>
+              <%= link_to edit_user_path(@user), class:"btn-lg" do %>
+                <i class="fas fa-user-cog" style="color: #333333;"></i>
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+        <!--プロフィール登録が行われていない場合未設定と表示する-->
+        <div class="col-lg-2 mb-2"><strong>｜年齢</strong></div>
+        <div class="col-lg-9 mb-2"><%= user.age.nil? ? "未設定" : user.age_i18n %></div>
+
+        <div class="col-lg-2 mb-2"><strong>｜性別</strong></div>
+        <div class="col-lg-9 mb-2"><%= user.gender.nil? ? "未設定" : user.gender_i18n %></div>
+
+        <div class="col-lg-2 mb-2"><strong>｜現在の状況</strong></div>
+        <div class="col-lg-9 mb-2"><%= user.status.nil? ? "未設定" : user.status_i18n %></div>
+
+        <div class="col-lg-2 mb-2"><strong>｜自己紹介</strong></div>
+        <div class="col-lg-6 mb-2"><%= user.introduction.nil? ? "未設定" : user.introduction %></div>
+      </div>
+    </div>
+  </div>
+</div>

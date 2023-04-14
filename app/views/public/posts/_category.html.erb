@@ -1,0 +1,17 @@
+<table class="table table-borderless rounded text-center" style="background-color: #FAF0E6" >
+  <thead>
+    <tr>
+      <th class="h3">
+        <strong>｜ カテゴリ ｜</strong>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% categories.each do |category| %>
+    <tr>
+      <!--  post_path(投稿一覧ページ)のカテゴリIDには取得したカテゴリIDを渡す  -->
+      <td><%= link_to category.name, posts_path(category_id: category.id), class: "text-reset" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

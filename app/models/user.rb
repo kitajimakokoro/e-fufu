@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   #バリデーション
-  validates :name, presence: true, length: { maximum: 15 }
+  validates :name, presence: true, length: { maximum: 10 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
   validates :is_deleted, inclusion: { in: [true, false] }

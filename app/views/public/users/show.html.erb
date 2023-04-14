@@ -1,26 +1,7 @@
-<div class"container px-3 px-sm-0">
-  <div class"col-6">
-<% if @user.is_deleted == false %> <!-- 退会していない時の処理 -->
-  <%= image_tag @user.get_profile_image(200,200), class:"rounded-circle" %>
-  <h4 class="profile-name"><%= @user.name %></h4>
-  </div>
-  <!--プロフィール内容が登録されていない時は未設定を表示する-->
-<div class"row">
-年齢: <%= @user.age.nil? ? "未設定" : @user.age_i18n %>
-性別: <%= @user.gender.nil? ? "未設定" : @user.gender_i18n %>
-現在の状況: <%= @user.status.nil? ? "未設定" : @user.status_i18n %>
-自己紹介: <%= @user.introduction.nil? ? "未設定" : @user.introduction %>
-  <!--ゲストユーザーはプロフィール編集リンクを表示しない-->
-  <% if @user.name != "guestuser" %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
-  <% if @user == current_user %>
-  <p><%= link_to "ブックマーク", bookmarks_user_path %><p>
-   <% end %>
-</div>
-</div>
-</div>
-</div>
-<% else %>  <!--退会している場合の処理(is_deleted:true)-->
- 退会済みユーザーです
+<!--退会していない場合の処理(is_deleted:false)-->
+<% if @user.is_deleted == false %>
+  <%= render 'info', user: @user %>
+<!--退会している場合の処理(is_deleted:true)-->
+<% else %>
+  <h3 class="text-center"><strong>退会済みユーザーです</strong></h3>
 <% end %>

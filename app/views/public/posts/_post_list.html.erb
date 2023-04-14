@@ -1,0 +1,33 @@
+<% posts.each do |post| %>
+  <!--退会していない場合の処理(is_deleted:false)-->
+  <% if post.user.is_deleted == false %>
+    <div>
+      <div class="list-group-item list-group-item-action">
+        <div class="row">
+          <div class="col-md-2 text-center">
+            <%= image_tag post.user.get_profile_image(70,70), class:"rounded-circle" %>
+          </div>
+          <div class="col-md-10">
+            <p>
+              <i class="fas fa-tag"></i>
+              <%= post.category.name %>
+              <%= link_to post_path(post.id), class: "text-reset" do %>
+                <%= truncate(post.text, length:28) %>
+              <% end %>
+            </p>
+            <span>
+              <%= post.created_at.strftime('%Y/%m/%d') %>｜
+              <!--  いいね機能  -->
+              <%= render 'public/likes/like', post: post %>
+            </span>
+            <i class="fas fa-comment" style="color:#A9A9A9"></i>
+            <%= post.post_comments.count %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!--退会している場合の処理(is_deleted:true)-->
+  <% else %>
+    <!--投稿自体を表示しない-->
+  <% end %>
+<% end %>
