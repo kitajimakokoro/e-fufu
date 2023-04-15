@@ -1,6 +1,50 @@
 <!--退会していない場合の処理(is_deleted:false)-->
 <% if @user.is_deleted == false %>
   <%= render 'info', user: @user %>
+  <div class="container px-sm-0">
+    <h2 class="mt-4 ml-5 pl-5">
+      <strong>新着の投稿</strong>
+    </h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="text-right mb-2">
+          <%= link_to "すべての投稿を見る　➔", posts_user_path(@user), class:"text-right" %></td>
+        </div>
+        <div class="list-group" style= "width: 100%">
+          <!-- 投稿一欄（新着3件）-->
+          <%= render 'public/posts/post_list', posts: @posts %>
+        </div>
+      </div>
+    </div>
+    <h3 class="mt-4 ml-5 pl-5">
+      <strong>コメントした投稿</strong>
+    </h3>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="text-right mb-2">
+          <%= link_to "すべてのコメントを見る　➔", comments_user_path(@user), class:"text-right" %></td>
+        </div>
+        <div class="list-group" style= "width: 100%">
+          <!-- コメント一覧（新着3件）-->
+          <%= render 'public/post_comments/comment_list', comments: @comments %>
+        </div>
+      </div>
+    </div>
+    <h3 class="mt-4 ml-5 pl-5">
+      <strong>いいねした投稿</strong>
+    </h3>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="text-right mb-2">
+          <%= link_to "すべてのいいねした投稿を見る　➔", likes_user_path(@user), class:"text-right" %></td>
+        </div>
+        <div class="list-group" style= "width: 100%">
+          <!-- いいね一覧（新着3件）-->
+          <%= render 'public/likes/like_list', like_posts: @like_posts %>
+        </div>
+      </div>
+    </div>
+  </div>
 <!--退会している場合の処理(is_deleted:true)-->
 <% else %>
   <h3 class="text-center"><strong>退会済みユーザーです</strong></h3>

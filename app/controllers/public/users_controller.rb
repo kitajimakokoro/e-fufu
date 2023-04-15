@@ -6,6 +6,10 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order('id DESC').limit(3)#新しい順に3つ
+    @comments = @user.post_comments.order('id DESC').limit(3)
+    like = Like.where(user_id: @user.id).pluck(:post_id)
+    @like_posts = Post.where(id: like).order('id DESC').limit(3)
   end
 
   #@userでユーザーを１件取得、1行目で取得した@userのpostsで投稿を取得
@@ -25,8 +29,8 @@ class Public::UsersController < ApplicationController
     #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルのpost_idも持ってくる
     #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
     like = Like.where(user_id: @user.id).pluck(:post_id)
-    #上記の投稿を引数としてPostモデルから投稿を取得
-    @like_posts = Post.find(like)
+    #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
+    @like_posts = Post.where(id: like)
   end
 
   def bookmarks
@@ -34,8 +38,8 @@ class Public::UsersController < ApplicationController
     #Bookmarkモデルのuser_idは上記で取得したユーザーのid＋Bookmarkモデルのpost_idも持ってくる
     #bookmarkの中身はあるユーザー(user_id)がブックマークした投稿(post_id)
     bookmark = Bookmark.where(user_id: @user.id).pluck(:post_id)
-    #上記の投稿を引数としてPostモデルから投稿を取得
-    @bookmark_posts = Post.find(bookmark)
+    #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
+    @bookmark_posts = Post.where(id: bookmark)
     if @user == current_user
        render "bookmarks"
     else

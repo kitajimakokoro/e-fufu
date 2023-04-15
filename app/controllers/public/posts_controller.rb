@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  
+
   before_action :authenticate_user!
 
   def new
@@ -25,10 +25,10 @@ class Public::PostsController < ApplicationController
       #Categoryモデルから該当するカテゴリのIDを取得し@categoryに代入
       @category = Category.find(params[:category_id])
       #上記で取得したカテゴリIDに該当する投稿をすべて表示
-      @posts = @category.posts.all
+      @posts = @category.posts.all.order(created_at: :desc)
     else
     #category_idを含んでいなければ投稿すべてを表示
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
     end
   end
 
