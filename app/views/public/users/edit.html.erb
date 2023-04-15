@@ -1,39 +1,75 @@
-<h2>ユーザー編集画面</h2>
-
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= image_tag @user.get_profile_image(100,100) %>
-<%= form_with model: @user do |f| %>
-<div class="field">
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-
-  <p>ニックネーム</p>
-  <%= f.text_field :name, autofocus: true %>
-
-  <p>メールアドレス</p>
-  <%= f.text_field :email, placeholder: "メールアドレスを入力して下さい。" %>
-  <!-- 設定したカラム内の内容を日本語化して呼び出す。デフォルトは未公開。-->
-  <p>年齢</p>
-  <%= f.select :age, User.ages_i18n.keys.map {|k| [ User.ages_i18n[k],k,k,k,k]} %>
-
-  <p>性別</p>
-  <%= f.select :gender, User.genders_i18n.keys.map {|k| [ User.genders_i18n[k],k,k]} %>
-
-  <p>現在の状況</p>
-  <%= f.select :status, User.statuses_i18n.keys.map {|k| [ User.statuses_i18n[k],k,k,k,k]} %>
-
-  <p>自己紹介</p>
-  <%= f.text_area :introduction %>
+<div class="container">
+  <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
+    <h5 class=" py-4 mb-0", style="color:#FFFFFF; background-color:#696969;">
+      <strong>マイページ編集フォーム</strong>
+    </h5>
+      <div class="form-body p-5">
+        <div class="mb-3">
+        <%= image_tag @user.get_profile_image(200,200), class:"rounded-circle" %>
+        </div>
+        <%= form_with model: @user do |f| %>
+          <div class="input-group mb-3">
+            <h6 class="col-md-12 p-0 text-left">
+              <i class="fas fa-file-image"></i>
+              プロフィール画像
+            </h6>
+            <div class="custom-file">
+              <%= f.file_field :profile_image, accept: "image/*", class: "custom-file-input", id: "inputFile" %>
+              <label class="custom-file-label text-left" for="inputFile" data-browse="参照">ファイルを選択</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-signature"></i>
+              ニックネーム
+            </h6>
+            <%= f.text_field :name, placeholder: "【必須】ニックネームを入力してください", class:"form-control form-control-sm mb-4" %>
+          </div>
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-envelope"></i>
+              メールアドレス
+            </h6>
+            <%= f.text_field :email, placeholder: "【必須】メールアドレスを入力してください", class:"form-control form-control-sm mb-4" %>
+          </div>
+           <!-- 設定したカラム内の内容を日本語化して呼び出す。デフォルトは未公開。({}がないとform-controlが効かない)-->
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-birthday-cake"></i>
+              年齢
+            </h6>
+            <%= f.select :age, User.ages_i18n.keys.map {|k| [ User.ages_i18n[k],k,k,k,k]}, {}, autocomplete: "prefecture_code",  class:"form-control form-control-sm mb-4" %>
+          </div>
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-male"></i><i class="fas fa-female"></i>
+              性別
+            </h6>
+            <%= f.select :gender, User.genders_i18n.keys.map {|k| [ User.genders_i18n[k],k,k]}, {}, autocomplete: "prefecture_code",  class:"form-control form-control-sm mb-4" %>
+          </div>
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-heart"></i>
+              現在の状況
+            </h6>
+            <%= f.select :status, User.statuses_i18n.keys.map {|k| [ User.statuses_i18n[k],k,k,k,k]}, {}, autocomplete: "prefecture_code",  class:"form-control form-control-sm mb-4" %>
+          </div>
+          <div class="form-group">
+            <h6 class="col-md-6 p-0 text-left">
+              <i class="fas fa-pen"></i>
+              自己紹介
+            </h6>
+            <%= f.text_area :introduction, placeholder: "自己紹介を入力（50文字以内）", rows: 6, class:"form-control form-control-sm mb-4" %>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col-mb-6 mb-2 mx-3">
+              <%= f.submit "  変更を保存  ", class: "btn btn-block mt-4", style:"color:#FFFFFF; background-color:#696969;" %>
+            </div>
+            <div class="col-mb-6 text-center mx-3">
+              <%= link_to "　退会する　", unsubscribe_users_path, class: 'btn btn-danger mt-4' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
 </div>
-<%= f.submit "変更を保存" %>
-<%= link_to "退会する", unsubscribe_users_path %>
-
-
-<% end %>
