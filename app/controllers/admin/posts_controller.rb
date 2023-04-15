@@ -5,9 +5,9 @@ class Admin::PostsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: :desc)
     else
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
     end
   end
 

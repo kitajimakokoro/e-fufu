@@ -1,36 +1,20 @@
-<div class="container add-font">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <h4 class="my-4">
-        <% if params[:user_id] %>
-        <mark class="bg-light"><%= @user.name %>さんの投稿履歴一覧</mark>
-        <% else %>
-        <mark class="bg-light">投稿履歴一覧</mark>
-        <% end %>
-        </h4>
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th>投稿者</th>
-            <th>カテゴリ名</th>
-            <th>内容</th>
-            <th>投稿日時</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @posts.each do |post| %>
-        <tr>
-  <td><%= post.user.name %></td>
-  <td><%= post.category.name %></td>
-  <td><%= link_to admin_post_path(post.id) do %>
-  <%= post.text %>
-   <% end %></td>
-  <td>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></td>
-      <td><%= link_to "削除", admin_post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
-    <% end %>
-    </tr>
-        </tbody>
-      </table>
+<div class="container px-sm-0">
+  <h2 class="my-4 ml-5 pl-5">
+    <strong>
+      <!-- user.idを拾ったらそのユーザーの投稿履歴一覧を表示-->
+      <% if params[:user_id] %>
+        <%= @user.name %>さんの投稿履歴一覧
+      <% else %>
+        投稿履歴一覧
+      <% end %>
+    </strong>
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="list-group" style= "width: 100%">
+        <!-- 投稿一覧 -->
+        <%= render 'admin/posts/post_list', posts: @posts %>
+      </div>
     </div>
   </div>
-  </div>
+</div>

@@ -1,0 +1,27 @@
+<% posts.each do |post| %>
+  <div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-md-2 text-center">
+          <%= image_tag post.user.get_profile_image(70,70), class:"rounded-circle" %>
+        </div>
+        <div class="col-md-10">
+          <p>
+            <i class="fas fa-tag"></i>
+            <%= post.category.name %><%= "　" %>
+            <%= link_to admin_post_path(post.id), class: "text-reset" do %>
+              <%= truncate(post.text, length:28) %>
+            <% end %>
+          </p>
+          <span>
+            <%= post.user.name %><%= "　" %>｜
+            <%= post.created_at.strftime('%Y/%m/%d') %>｜
+            <%= link_to admin_post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？", class:"text-reset text-decoration-none text-left" do %>
+              <i class="fas fa-trash-alt" style="color:#B22222"></i>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

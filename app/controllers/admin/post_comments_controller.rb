@@ -4,9 +4,9 @@ class Admin::PostCommentsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @comments = @user.post_comments
+      @comments = @user.post_comments.order(created_at: :desc)
     else
-      @comments = PostComment.all
+      @comments = PostComment.all.order(created_at: :desc)
     end
   end
 

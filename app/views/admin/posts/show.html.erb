@@ -1,25 +1,52 @@
-<div>
-  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <p>カテゴリ名：<%= @post.category.name %>
-
-  <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
-  <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
-  <p>投稿文：<%= @post.text %></p>
-    <%= link_to "削除", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-
-</div>
-
-
-<div>
-    <p><%= @post.post_comments.count %>件のコメント</p>
-  <!--  @postに格納した投稿データに紐づくpost_comments(モデル)の情報を呼び出しpost_commentに格納  -->
-  <% @post.post_comments.each do |post_comment| %>
-  <!--  post_commentに紐づいたuser(モデル)の名前 -->
-    <p><%= post_comment.user.name %></p>
-    <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-    <p><%= post_comment.comment %></p>
-      <%= link_to "削除", admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>
+<div class="container px-3 px-sm-0">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card mt-4 shadow-sm">
+        <!--  レコードにファイルが添付されていれば、trueをなければfalseを返す  -->
+        <%= image_tag @post.get_image(160,200), class:"post-image" if @post.image.attached? %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2">
+              <%= image_tag @post.user.get_profile_image(70,70), class:"rounded-circle" %>
+            </div>
+            <div class="col-10">
+              <p class="m-0 mt-2 pb-1">
+                <%= link_to admin_user_path(@post.user), class:"text-reset", style:"text-decoration: black underline" do %>
+                  <%= @post.user.name %>
+                <% end %>
+              </p>
+              <span>
+                <!--  投稿日時  -->
+                <%= @post.created_at.strftime('%Y/%m/%d') %>｜
+                <!--  コメント数  -->
+                <i class="fas fa-comment" style="color:#A9A9A9"></i>
+                <%= @post.post_comments.count %>｜
+                <!--  削除(ゴミ箱)  -->
+                <%= link_to admin_post_path(@post), method: :delete, "data-confirm" => "この投稿を削除しますか？", class:"text-reset text-decoration-none text-left" do %>
+                  <i class="fas fa-trash-alt" style="color:#B22222"></i>
+                <% end %>
+              </span>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <div class="h5 mb-2 p-2">
+                <strong>
+                  <i class="fas fa-tag"></i><%= @post.category.name %>
+                </strong>
+              </div>
+              <p class="pl-2"><%= @post.text %></p>
+            </div>
+          </div>
+          <hr>
+          <div class="comments card-text">
+            <h5 class="pl-2"><%= @post.post_comments.count %>件のコメント</h5>
+            <!--  コメント一覧  -->
+            <%= render 'admin/post_comments/comments', post: @post %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
