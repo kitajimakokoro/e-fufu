@@ -16,12 +16,12 @@ class Public::UsersController < ApplicationController
   #アソシエーションをモデルに記載したからできること
   def posts
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def comments
     @user = User.find(params[:id])
-    @comments = @user.post_comments
+    @comments = @user.post_comments.order(created_at: :desc)
   end
 
   def likes
@@ -30,7 +30,7 @@ class Public::UsersController < ApplicationController
     #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
     like = Like.where(user_id: @user.id).pluck(:post_id)
     #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
-    @like_posts = Post.where(id: like)
+    @like_posts = Post.where(id: like).order(created_at: :desc)
   end
 
   def bookmarks
@@ -39,7 +39,7 @@ class Public::UsersController < ApplicationController
     #bookmarkの中身はあるユーザー(user_id)がブックマークした投稿(post_id)
     bookmark = Bookmark.where(user_id: @user.id).pluck(:post_id)
     #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
-    @bookmark_posts = Post.where(id: bookmark)
+    @bookmark_posts = Post.where(id: bookmark).order(created_at: :desc)
     if @user == current_user
        render "bookmarks"
     else
