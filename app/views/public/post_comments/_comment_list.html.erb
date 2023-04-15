@@ -10,7 +10,7 @@
           <div class="col-md-10">
             <p>
               <%= link_to post_path(post_comment.post.id), class: "text-reset" do %>
-                <%= post_comment.comment %>
+                <%= truncate(post_comment.comment, length:35) %>
               <% end %>
             </p>
             <span>
