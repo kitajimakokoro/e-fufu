@@ -14,6 +14,9 @@
       <div class="list-group" style= "width: 100%">
         <!-- 投稿一覧 -->
         <%= render 'admin/posts/post_list', posts: @posts %>
+        <div class="mx-auto mt-2">
+          <%= paginate @posts %>
+        </div>
       </div>
     </div>
   </div>

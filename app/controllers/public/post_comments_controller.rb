@@ -1,5 +1,5 @@
 class Public::PostCommentsController < ApplicationController
-  
+
   before_action :authenticate_user!
 
   def create
@@ -23,6 +23,7 @@ class Public::PostCommentsController < ApplicationController
   def destroy
     post = PostComment.find(params[:id])
     post.destroy
+    flash[:notice] = "コメントを削除しました。"
     redirect_to request.referer
   end
 

@@ -12,19 +12,26 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <% if notice %>
-      <div class="alert alert-success">
-        <%= notice %>
-      </div>
-    <% end %>
-    <% if alert %>
-      <div class="alert alert-danger">
-        <%= alert %>
-      </div>
-    <% end %>
-  <main class="mb-5">
-    <%= yield %>
-  </main>
-  <%= render 'layouts/footer' %>
-    </body>
+
+      <% if notice %>
+        <div class="text-white" style="background-color: #BC8F8F">
+          <strong>
+            <%= notice %>
+          </strong>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger">
+          <strong>
+            <%= alert %>
+          </strong>
+        </div>
+      <% end %>
+
+    <main class="mb-5">
+      <%= yield %>
+    </main>
+
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

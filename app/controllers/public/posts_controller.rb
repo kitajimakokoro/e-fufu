@@ -10,10 +10,9 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:notice] = "OK"
       redirect_to post_path(@post)
     else
-      flash.now[:alert] = "NG"
+      flash.now[:alert] = "入力内容を再度ご確認ください。"
       render :new
     end
   end
@@ -25,10 +24,10 @@ class Public::PostsController < ApplicationController
       #Categoryモデルから該当するカテゴリのIDを取得し@categoryに代入
       @category = Category.find(params[:category_id])
       #上記で取得したカテゴリIDに該当する投稿をすべて表示
-      @posts = @category.posts.all.order(created_at: :desc)
+      @posts = @category.posts.page(params[:page]).per(10).order(created_at: :desc)
     else
     #category_idを含んでいなければ投稿すべてを表示
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.page(params[:page]).per(10).order(created_at: :desc)
     end
   end
 
@@ -49,7 +48,7 @@ class Public::PostsController < ApplicationController
     #入力した検索ワードをparams[:keyword]で取得、presentは存在を問う
     if params[:keyword].present?
       #入力したキーワードで検索し、text内にそのキーワードが含まれたものをすべて取得
-      @posts = Post.where('text LIKE ?', "%#{params[:keyword]}%")
+      @posts = Post.where('text LIKE ?', "%#{params[:keyword]}%").page(params[:page]).per(2).order(created_at: :desc)
       #入力した検索ワードを取得して検索結果画面を表示する
       @keyword = params[:keyword]
     else
