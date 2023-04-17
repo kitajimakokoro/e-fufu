@@ -11,20 +11,19 @@ class Public::PostCommentsController < ApplicationController
     comment.user_id = current_user.id
     #➃投稿コメントのpost.idには➀で取得した投稿データのidを指定
     comment.post_id = post.id
-    if comment.save
-    #元のページにリダイレクト
-      redirect_to request.referer
-    else
-      redirect_to request.referer
-    end
+    comment.save
+    #非同期通信用のインスタンス変数を定義
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.new
 
   end
 
   def destroy
     post = PostComment.find(params[:id])
     post.destroy
-    flash[:notice] = "コメントを削除しました。"
-    redirect_to request.referer
+    #非同期通信用のインスタンス変数を定義
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.new
   end
 
     private

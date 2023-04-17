@@ -23,7 +23,7 @@
             <i class="fas fa-comment" style="color:#A9A9A9"></i>
             <%= post.post_comments.count %>｜
             <!--  ブックマーク機能  -->
-            <%= render 'public/bookmarks/bookmark', post: post %>
+            <span id="bookmark_buttons_<%= post.id %>"><%= render 'public/bookmarks/bookmark', post: post %></span>
           </div>
         </div>
       </div>

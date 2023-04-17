@@ -1,12 +1,12 @@
 <!--  投稿画像に付けられたブックマークに、ログインしているユーザーが含まれているか  -->
 <% if post.bookmarked_by?(current_user) %>
-  <!--  user.idが含まれている時ブックマークを外す  -->
-  <%= link_to post_bookmarks_path(post), method: :delete, class:"text-reset text-decoration-none" do %>
+  <!--  user.idが含まれている時ブックマークを外す、remote:trueで非同期通信化  -->
+  <%= link_to post_bookmarks_path(post), method: :delete, remote: true, class:"text-reset text-decoration-none" do %>
     <i class="fas fa-bookmark" style="color:#FF8C00"></i>｜
   <% end %>
 <% else %>
-  <!--  user.idが含まれていない時ブックマークをする  -->
-  <%= link_to post_bookmarks_path(post), method: :post, class:"text-reset text-decoration-none" do %>
+  <!--  user.idが含まれていない時ブックマークをする、remote:trueで非同期通信化  -->
+  <%= link_to post_bookmarks_path(post), method: :post, remote: true, class:"text-reset text-decoration-none" do %>
     <i class="far fa-bookmark" style="color:#A9A9A9"></i>｜
   <% end %>
 <% end %>

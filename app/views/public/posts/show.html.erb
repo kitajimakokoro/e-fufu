@@ -19,12 +19,12 @@
                 <!--  投稿日時  -->
                 <%= @post.created_at.strftime('%Y/%m/%d') %>｜
                 <!--  いいね機能  -->
-                <%= render 'public/likes/like', post: @post %>
+                <span id="like_buttons_<%= @post.id %>"><%= render 'public/likes/like', post: @post %></span>
                 <!--  コメント数  -->
                 <i class="fas fa-comment" style="color:#A9A9A9"></i>
                 <%= @post.post_comments.count %>｜
                 <!--  ブックマーク機能  -->
-                <%= render 'public/bookmarks/bookmark', post: @post %>
+                <span id="bookmark_buttons_<%= @post.id %>"><%= render 'public/bookmarks/bookmark', post: @post %></span>
                 <!--  削除(ゴミ箱)  -->
                 <% if @post.user == current_user %>
                   <%= link_to post_path(@post), method: :delete, "data-confirm" => "この投稿を削除しますか？", class:"text-reset text-decoration-none text-left" do %>
@@ -46,18 +46,8 @@
             </div>
           </div>
           <hr>
-          <div class="new-comment card-text">
-            <div class="form-group">
-              <!--  コメント投稿フォーム  -->
-              <%= render 'public/post_comments/new_comment', post: @post, post_comment: @post_comment %>
-            </div>
-          </div>
-          <hr>
-          <div class="comments card-text">
-            <h5 class="pl-2"><%= @post.post_comments.count %>件のコメント</h5>
-            <!--  コメント一覧  -->
-            <%= render 'public/post_comments/comments', post: @post %>
-          </div>
+          <!--  コメント投稿フォームとコメント一覧  -->
+          <div id="comments-area"><%= render 'public/post_comments/comments', post: @post, post_comment: @post_comment %></div>
         </div>
       </div>
     </div>

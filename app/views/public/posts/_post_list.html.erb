@@ -18,10 +18,10 @@
             <span>
               <%= post.created_at.strftime('%Y/%m/%d') %>｜
               <!--  いいね機能 post.idの部分が投稿によって変わる-->
-              <%= render 'public/likes/like', post: post %>
+              <span id="like_buttons_<%= post.id %>"><%= render 'public/likes/like', post: post %></span>
+              <i class="fas fa-comment" style="color:#A9A9A9"></i>
+              <%= post.post_comments.count %>
             </span>
-            <i class="fas fa-comment" style="color:#A9A9A9"></i>
-            <%= post.post_comments.count %>
           </div>
         </div>
       </div>

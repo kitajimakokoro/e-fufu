@@ -1,3 +1,3 @@
 <!--  1.htmlでhtmlのviewファイルの中身を変えることを宣言-->
 <!--  2.j()でrender内の部分テンプレートをjsファイルで読み込む  -->
-$("#likes_buttons_<%= @post.id %>").html("<%= j(render 'public/likes/like', post: @post) %>")
+$("#like_buttons_<%= @post.id %>").html("<%= j(render 'public/likes/like', post: @post) %>")
