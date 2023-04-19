@@ -48,7 +48,7 @@ class Public::PostsController < ApplicationController
     #入力した検索ワードをparams[:keyword]で取得、presentは存在を問う
     if params[:keyword].present?
       #入力したキーワードで検索し、text内にそのキーワードが含まれたものをすべて取得
-      @posts = Post.where('text LIKE ?', "%#{params[:keyword]}%").page(params[:page]).per(2).order(created_at: :desc)
+      @posts = Post.where('text LIKE ?', "%#{params[:keyword]}%").page(params[:page]).per(10).order(created_at: :desc)
       #入力した検索ワードを取得して検索結果画面を表示する
       @keyword = params[:keyword]
     else

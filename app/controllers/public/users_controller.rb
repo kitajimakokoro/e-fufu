@@ -56,6 +56,7 @@ class Public::UsersController < ApplicationController
       if @user == current_user
         render "edit"
       else
+        flash[:alert] = "他のユーザーのプロフィールは編集できません。"
         redirect_to user_path(current_user)
       end
   end

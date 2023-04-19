@@ -10,8 +10,13 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save
-    redirect_to request.referer
+    if @category.save
+      redirect_to admin_categories_path
+    else
+      flash[:alert] = "入力内容を再度ご確認ください。なお、既にあるカテゴリ名は入力できません。"
+      redirect_to admin_categories_path
+    end
+
   end
 
 
