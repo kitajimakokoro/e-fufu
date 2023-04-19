@@ -1,6 +1,6 @@
 <div class="new-comment card-text">
   <div class="form-group">
-    <!--  コメント投稿フォーム、formwithにremoteというオプションは存在しないため、local:falseで非同期通信化  -->
+    <!--  コメント投稿フォーム、form_withにremoteというオプションは存在しないため、local:falseで非同期通信化  -->
     <!--  コメントはPostモデルに紐づいたpost_commentである＋ルーティングをネストしているためインスタンス変数を２つ指定 -->
       <%= form_with(model: [post, post_comment], local: false) do |f| %>
         <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力（200文字以内）", class:"form-control" %>

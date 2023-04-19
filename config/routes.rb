@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
+
+
   #URLにadminを入れる
   namespace :admin do
     get 'users/:user_id/posts' => 'posts#index', as: 'users_posts'
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:destroy]
     end
   end
+
 
   #publicをURLから抜く
   scope module: :public do

@@ -3,14 +3,20 @@
   <!-- ユーザーのプロフィール -->
   <%= render 'info', user: @user %>
   <div class="container px-sm-0">
-    <h2 class="my-4 ml-5 pl-5">
+    <h2 class="my-4 ml-lg-5 pl-lg-5">
       <strong>ブックマーク一覧</strong>
     </h2>
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="list-group" style= "width: 100%">
-          <!-- ブックマークした投稿一覧-->
-          <%= render 'public/bookmarks/bookmark_list', bookmark_posts: @bookmark_posts %>
+          <% if @bookmark_posts.any? %>
+            <!-- ブックマークした投稿一覧-->
+            <%= render 'public/bookmarks/bookmark_list', bookmark_posts: @bookmark_posts %>
+          <% else %>
+            <div class="list-group-item text-center  p-2">
+              <p class="p-2 m-2">まだブックマークした投稿はありません</p>
+            </div>
+          <% end %>
         </div>
          <div class="d-flex justify-content-center mt-2">
           <%= paginate @bookmark_posts %>

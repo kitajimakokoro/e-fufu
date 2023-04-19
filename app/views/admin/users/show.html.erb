@@ -29,17 +29,15 @@
           <div class="col-lg-6 mb-2"><%= @user.introduction.nil? ? "未設定" : @user.introduction %></div>
 
           <div class="col-lg-4 mb-2"><strong>｜会員ステータス</strong></div>
-          <div class="col-lg-6 mb-2">
+          <div class="col-lg-10 px-5 pb-2">
             <%= form_with model: @user, url: admin_user_path do |f| %>
               <%= f.radio_button :is_deleted, :false %>
               <%= f.label :is_deleted_false, "有効", class:"mr-3" %>
               <%= f.radio_button :is_deleted, :true %>
               <%= f.label :is_deleted_true, "退会 / 利用停止" %>
-          </div>
-          <div class="col-lg-10 px-5 pb-2">
               <%= f.submit "会員ステータスの変更を保存" ,class: "btn btn-block btn-warning" %>
-          </div>
             <% end %>
+          </div>
           <div class="col-lg-10 px-5 pb-2">
             <%=link_to  "投稿履歴一覧を見る", admin_users_posts_path(@user) ,class: "btn btn-block btn-outline-dark" %>
           </div>

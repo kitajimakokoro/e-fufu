@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+
   before_action :authenticate_admin!
 
   def index
@@ -12,8 +13,8 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-      flash[:notice] = "会員ステータスを変更しました"
-      redirect_to admin_user_path(@user)
+    flash[:notice] = "会員ステータスを変更しました"
+    redirect_to admin_user_path(@user)
   end
 
 

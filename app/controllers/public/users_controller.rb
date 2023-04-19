@@ -1,41 +1,44 @@
 class Public::UsersController < ApplicationController
+
   before_action :authenticate_user!
-  #ゲストユーザーはプロフィール編集画面に遷移できない。
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, only: [:edit] #ゲストユーザーはプロフィール編集画面に遷移できない。
 
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order('id DESC').limit(3)#新しい順に3つ
+    @posts = @user.posts.order('id DESC').limit(3) #新しい順に3つ
     @comments = @user.post_comments.order('id DESC').limit(3)
     like = Like.where(user_id: @user.id).pluck(:post_id)
     @like_posts = Post.where(id: like).order('id DESC').limit(3)
   end
 
-  #@userでユーザーを１件取得、1行目で取得した@userのpostsで投稿を取得
-  #アソシエーションをモデルに記載したからできること
+
   def posts
+    #@userでユーザーを１件取得、1行目で取得した@userのpostsで投稿を取得
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(10).order(created_at: :desc)
   end
+
 
   def comments
     @user = User.find(params[:id])
     @comments = @user.post_comments.page(params[:page]).per(10).order(created_at: :desc)
   end
 
+
   def likes
     @user = User.find(params[:id])
-    #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルのpost_idも持ってくる
+    #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルに格納されたpost_idも持ってくる
     #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
     like = Like.where(user_id: @user.id).pluck(:post_id)
     #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
     @like_posts = Post.where(id: like).page(params[:page]).per(10).order(created_at: :desc)
   end
 
+
   def bookmarks
     @user = User.find(params[:id])
-    #Bookmarkモデルのuser_idは上記で取得したユーザーのid＋Bookmarkモデルのpost_idも持ってくる
+    #Bookmarkモデルのuser_idは上記で取得したユーザーのid＋Bookmarkモデルに格納されpost_idも持ってくる
     #bookmarkの中身はあるユーザー(user_id)がブックマークした投稿(post_id)
     bookmark = Bookmark.where(user_id: @user.id).pluck(:post_id)
     #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
@@ -47,6 +50,7 @@ class Public::UsersController < ApplicationController
     end
   end
 
+
   def edit
     @user = User.find(params[:id])
       if @user == current_user
@@ -56,9 +60,11 @@ class Public::UsersController < ApplicationController
       end
   end
 
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:notice] = "プロフィール編集が完了しました。"
       redirect_to user_path(@user)
     else
       flash.now[:alert] = "入力内容を再度ご確認ください。"
@@ -66,8 +72,10 @@ class Public::UsersController < ApplicationController
     end
   end
 
+
   def unsubscribe
   end
+
 
   def withdraw
     @user = current_user
@@ -79,6 +87,7 @@ class Public::UsersController < ApplicationController
     #ログアウト後ルートパスに遷移
     redirect_to root_path
   end
+
 
 
   private

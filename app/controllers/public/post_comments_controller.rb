@@ -3,17 +3,16 @@ class Public::PostCommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    #➀まずPostモデルから投稿データを１件取得
-    post = Post.find(params[:post_id])
-    #➁Postcommentモデルに紐づくデータとして投稿コメントをcommentに格納
+    #まずPostモデルから投稿データを１件取得
+    @post = Post.find(params[:post_id])
+    #Postcommentモデルに紐づくデータとして投稿コメントをcommentに格納
     comment = PostComment.new(post_comment_params)
-    #➂投稿コメントのuser.idには現在ログイン中のユーザーのuser.idを指定
+    #投稿コメントのuser.idには現在ログイン中のユーザーのuser.idを指定
     comment.user_id = current_user.id
-    #➃投稿コメントのpost.idには➀で取得した投稿データのidを指定
-    comment.post_id = post.id
+    #投稿コメントのpost.idには１行目で取得した投稿データのidを指定
+    comment.post_id = @post.id
     comment.save
     #非同期通信用のインスタンス変数を定義
-    @post = Post.find(params[:post_id])
     @post_comment = PostComment.new
 
   end

@@ -5,7 +5,8 @@ class Users::SessionsController < Devise::SessionsController
     user = User.guest
     #sign_in userでゲストユーザーをログイン状態にする
     sign_in user
-    redirect_to posts_path, notice: 'ゲストユーザーでログインしました。'
+    flash[:notice] = "ゲストユーザーでログインしました。"
+    redirect_to posts_path
   end
 
   def guest_user

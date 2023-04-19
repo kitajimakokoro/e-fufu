@@ -37,9 +37,9 @@ def user_state
   return if !@user
     #取得したアカウントのパスワードと入力されたパスワードが一致してるか && 取得したユーザーの退会ステータスを判別
   if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
-    flash[:alert] = "退会済みの為、再登録が必要です。"
-    #上記どちらもtrueだった場合、サインアップ画面に遷移する
-    redirect_to new_user_registration_path
+     flash[:alert] = "退会済みの為、再登録が必要です。"
+     #上記どちらもtrueだった場合、サインアップ画面に遷移する
+     redirect_to new_user_registration_path
   end
 end
 

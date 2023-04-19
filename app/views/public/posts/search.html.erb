@@ -12,12 +12,12 @@
             <%= link_to "投稿する", new_post_path, class: "btn btn-block", style:"color:#FFFFFF; background-color:#696969;" %>
           </div>
         </div>
-        <!-- 投稿一覧-->
         <div class="list-group" style= "width: 100%">
           <!-- キーワードが入力されている場合以下の処理を行う-->
           <% if @keyword.first %>
             <!-- 検索結果が1件以上ある場合(any?でtrue)-->
             <% if @posts.any? %>
+              <!-- 該当する投稿一覧表示 -->
               <%= render 'post_list', posts: @posts %>
             <!-- 検索結果が0件の時(any?でfalse)-->
             <% else %>
