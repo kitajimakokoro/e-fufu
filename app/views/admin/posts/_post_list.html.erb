@@ -14,7 +14,9 @@
             <% end %>
           </p>
           <span>
-            <%= post.user.name %><%= "　" %>｜
+            <%= link_to admin_user_path(post.user.id), class: "text-reset" do %>
+              <%= post.user.name %>
+            <% end %>｜
             <%= post.created_at.strftime('%Y/%m/%d') %>｜
             <%= link_to admin_post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？", class:"text-reset text-decoration-none text-left" do %>
               <i class="fas fa-trash-alt" style="color:#B22222"></i>
