@@ -18,7 +18,7 @@
             <span>
               <%= post.created_at.strftime('%Y/%m/%d') %>｜
               <!--  いいね機能  -->
-              <%= render 'public/likes/like', post: post %>
+              <span id="like_buttons_<%= post.id %>"><%= render 'public/likes/like', post: post %></span>
             </span>
             <i class="fas fa-comment" style="color:#A9A9A9"></i>
             <%= post.post_comments.count %>｜
