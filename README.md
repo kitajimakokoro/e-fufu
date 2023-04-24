@@ -23,8 +23,8 @@
 - 自分の気持ちに共感してほしい時に
 
 ## 設計書
-- [wire_fream(admin)](https://drive.google.com/file/d/1HszTmTBt3Hvb0N5x3PgYnbr7rkVo7uzh/view?usp=share_link)
 - [wire_fream(public)](https://drive.google.com/file/d/1euHTVlNw5RKhjW77u9iTrpxEvlvHUnbR/view?usp=share_link)
+- [wire_fream(admin)](https://drive.google.com/file/d/1HszTmTBt3Hvb0N5x3PgYnbr7rkVo7uzh/view?usp=share_link)
 - [UI Flows](https://drive.google.com/file/d/1cHoIScC8WNTGiz9_w1LG_yiwvDEUEAj6/view?usp=share_link)
 - [ER図](https://drive.google.com/file/d/1xAVj76fy0OijXEGYYL77JxEfoENh69h_/view?usp=share_link)
 - [テーブル定義書](https://drive.google.com/file/d/1fqDkRKnLyeY2RWbFtTkjoiwJZjNRvUum/view?usp=share_link)
