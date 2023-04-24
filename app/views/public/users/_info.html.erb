@@ -17,8 +17,8 @@
               <% end %>
             </p>
           <% end %>
-          <!--guestuserの場合プロフィール編集リンクを表示させない-->
-          <% if user.name != "guestuser" %>
+          <!--ゲストユーザーの場合プロフィール編集リンクを表示させない-->
+          <% if user.email != "guest@example.com" %>
             <p>
               <%= link_to edit_user_path(@user), class:"btn-lg" do %>
                 <i class="fas fa-user-cog" style="color: #333333;"></i>
