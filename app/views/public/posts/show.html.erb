@@ -1,3 +1,5 @@
+<!--退会していない場合の処理(is_deleted:false)-->
+<% if @post.user.is_deleted == false %>
 <div class="container px-3 px-sm-0">
   <div class="row justify-content-center">
     <div class="col-lg-6">
@@ -53,4 +55,7 @@
     </div>
   </div>
 </div>
-
+<!--退会している場合の処理(is_deleted:true)-->
+<% else %>
+  【退会済ユーザー】この投稿は削除されました。
+<% end %>
