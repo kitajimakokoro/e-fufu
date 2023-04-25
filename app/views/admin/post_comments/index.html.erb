@@ -12,8 +12,14 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="list-group" style= "width: 100%">
-          <!-- コメント一覧-->
-          <%= render 'admin/post_comments/comment_list', comments: @comments %>
+          <% if @comments.any? %>
+            <!-- コメント一覧-->
+            <%= render 'admin/post_comments/comment_list', comments: @comments %>
+          <% else %>
+            <div class="list-group-item text-center  p-2">
+              <p class="p-2 m-2">コメントはありません</p>
+            </div>
+          <% end %>
           <div class="mx-auto mt-2">
             <%= paginate @comments %>
           </div>
