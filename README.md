@@ -26,7 +26,7 @@
 - [wire_fream(public)](https://drive.google.com/file/d/1euHTVlNw5RKhjW77u9iTrpxEvlvHUnbR/view?usp=share_link)
 - [wire_fream(admin)](https://drive.google.com/file/d/1HszTmTBt3Hvb0N5x3PgYnbr7rkVo7uzh/view?usp=share_link)
 - [UI Flows](https://drive.google.com/file/d/1cHoIScC8WNTGiz9_w1LG_yiwvDEUEAj6/view?usp=share_link)
-- [ER図](https://drive.google.com/file/d/1xAVj76fy0OijXEGYYL77JxEfoENh69h_/view?usp=share_link)
+- [ER図](https://drive.google.com/file/d/1w23AC88n0mo8DPOqsdKGJBURiWPVBwc6/view?usp=share_link)
 - [テーブル定義書](https://drive.google.com/file/d/1fqDkRKnLyeY2RWbFtTkjoiwJZjNRvUum/view?usp=share_link)
 - [アプリケーション詳細設計](https://drive.google.com/file/d/19t2hUtJOENL-V8RbBtpXrDmjEd0rRQN_/view?usp=share_link)
 - [テスト仕様書](https://drive.google.com/file/d/1J0L3nCwL8Igm-ytgKSjTyAMEoQynaD1-/view?usp=share_link)
