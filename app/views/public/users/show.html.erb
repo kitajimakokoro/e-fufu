@@ -13,7 +13,7 @@
         <div class="list-group" style= "width: 100%">
           <% if @posts.any? %>
             <!-- 投稿一欄（新着3件）-->
-            <%= render 'public/posts/post_list', posts: @posts %>
+            <%= render 'public/posts/list', posts: @posts %>
           <% else %>
             <div class="list-group-item text-center p-2">
               <p class="p-2 m-2">まだ投稿がありません</p>
@@ -53,7 +53,7 @@
         <div class="list-group" style= "width: 100%">
           <% if @like_posts.any? %>
             <!-- いいね一覧（新着3件）-->
-            <%= render 'public/likes/like_list', like_posts: @like_posts %>
+            <%= render 'public/posts/list', posts: @like_posts %>
           <% else %>
             <div class="list-group-item text-center  p-2">
               <p class="p-2 m-2">まだいいねした投稿はありません</p>

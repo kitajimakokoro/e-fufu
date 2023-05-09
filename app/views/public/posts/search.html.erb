@@ -18,7 +18,7 @@
             <!-- 検索結果が1件以上ある場合(any?でtrue)-->
             <% if @posts.any? %>
               <!-- 該当する投稿一覧表示 -->
-              <%= render 'post_list', posts: @posts %>
+              <%= render 'public/posts/list', posts: @posts %>
             <!-- 検索結果が0件の時(any?でfalse)-->
             <% else %>
               <h3>"<%= @keyword %>"の検索結果はありません。</h3>

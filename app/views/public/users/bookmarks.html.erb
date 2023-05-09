@@ -11,7 +11,7 @@
         <div class="list-group" style= "width: 100%">
           <% if @bookmark_posts.any? %>
             <!-- ブックマークした投稿一覧-->
-            <%= render 'public/bookmarks/bookmark_list', bookmark_posts: @bookmark_posts %>
+            <%= render 'public/posts/list', posts: @bookmark_posts %>
           <% else %>
             <div class="list-group-item text-center  p-2">
               <p class="p-2 m-2">まだブックマークした投稿はありません</p>
