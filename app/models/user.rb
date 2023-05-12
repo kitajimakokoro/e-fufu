@@ -20,6 +20,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
+  #追加
+  has_many :like_posts, through: :likes, source: :post
+  has_many :bookmark_posts, through: :bookmarks, source: :post
+
   #バリデーション
   validates :name, presence: true, length: { maximum: 10 }
   validates :email, presence: true
