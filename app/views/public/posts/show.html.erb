@@ -29,7 +29,7 @@
                 <span id="bookmark_buttons_<%= @post.id %>"><%= render 'public/bookmarks/bookmark', post: @post %></span>
                 <% if @post.user == current_user %>｜
                   <!--  編集リンク  -->
-                  <%= link_to edit_post_path(@post.id), class:"text-reset text-decoration-none text-left" do %>
+                  <%= link_to edit_path(@post), class:"text-reset text-decoration-none text-left" do %>
                     <i class="fas fa-pen" style="color:#6495ED"></i>
                   <% end %>｜
                   <!--  削除(ゴミ箱)  -->
