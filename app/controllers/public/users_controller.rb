@@ -8,8 +8,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.order('id DESC').limit(3) #新しい順に3つ
     @comments = @user.post_comments.order('id DESC').limit(3)
-    like = Like.where(user_id: @user.id).pluck(:post_id)
-    @like_posts = Post.where(id: like).order('id DESC').limit(3)
+    @like_posts = @user.like_posts.order('id DESC').limit(3)
   end
 
 
@@ -27,23 +26,15 @@ class Public::UsersController < ApplicationController
 
 
   def likes
+    #@like_postsの中身は、@user＝Userモデルから取得したユーザーが、like_posts＝いいねした投稿
     @user = User.find(params[:id])
-    #Likeモデルのuser_idは上記で取得したユーザーのid＋Likeモデルに格納されたpost_idも持ってくる
-    #likeの中身はあるユーザー(user_id)がいいねした投稿(post_id)
-    #これを変える like = Like.where(user_id: @user.id).pluck(:post_id)
-    #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
-    #これを変える @like_posts = Post.where(id: like).page(params[:page]).per(10).order(created_at: :desc)
     @like_posts = @user.like_posts.page(params[:page]).per(10).order(created_at: :desc)
   end
 
 
   def bookmarks
+    #@bookmark_postsの中身は、@user＝Userモデルから取得したユーザーが、bookmark_posts＝ブックマークした投稿
     @user = User.find(params[:id])
-    #Bookmarkモデルのuser_idは上記で取得したユーザーのid＋Bookmarkモデルに格納されpost_idも持ってくる
-    #bookmarkの中身はあるユーザー(user_id)がブックマークした投稿(post_id)
-    #これを変える bookmark = Bookmark.where(user_id: @user.id).pluck(:post_id)
-    #上記の投稿を引数としてPostモデルから紐づく複数のレコードを取得
-    #これを変える @bookmark_posts = Post.where(id: bookmark).page(params[:page]).per(10).order(created_at: :desc)
     @bookmark_posts = @user.bookmark_posts.page(params[:page]).per(10).order(created_at: :desc)
     if @user == current_user
        render "bookmarks"

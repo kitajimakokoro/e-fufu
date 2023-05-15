@@ -19,8 +19,8 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-
-  #追加
+  #through: :likesでlikeモデルを経由し、source: :postで関連付け先のpostモデルを取得
+  #like_postsの中身はあるユーザーがいいね(likes)した投稿(post)
   has_many :like_posts, through: :likes, source: :post
   has_many :bookmark_posts, through: :bookmarks, source: :post
 
