@@ -26,9 +26,13 @@
                 <i class="fas fa-comment" style="color:#A9A9A9"></i>
                 <%= @post.post_comments.count %>｜
                 <!--  ブックマーク機能  -->
-                <span id="bookmark_buttons_<%= @post.id %>"><%= render 'public/bookmarks/bookmark', post: @post %></span>｜
-                <!--  削除(ゴミ箱)  -->
-                <% if @post.user == current_user %>
+                <span id="bookmark_buttons_<%= @post.id %>"><%= render 'public/bookmarks/bookmark', post: @post %></span>
+                <% if @post.user == current_user %>｜
+                  <!--  編集リンク  -->
+                  <%= link_to edit_post_path(@post), class:"text-reset text-decoration-none text-left" do %>
+                    <i class="fas fa-pen" style="color:#6495ED"></i>
+                  <% end %>｜
+                  <!--  削除(ゴミ箱)  -->
                   <%= link_to post_path(@post), method: :delete, "data-confirm" => "この投稿を削除しますか？", class:"text-reset text-decoration-none text-left" do %>
                     <i class="fas fa-trash-alt" style="color:#B22222"></i>
                   <% end %>

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto no-gutters text-center shadow-lg px-0 mt-5">
     <h5 class=" py-4 mb-0", style="color:#FFFFFF; background-color:#696969;">
-      <strong>投稿フォーム</strong>
+      <strong>投稿編集フォーム</strong>
     </h5>
       <div class="form-body p-4 mt-4">
         <%= render "public/shared/error_messages", resource: @post %>
@@ -32,7 +32,7 @@
             <%= f.text_area :text, placeholder: "【必須】内容を入力（500文字以内）", rows: 6, class:"form-control form-control-sm mb-4" %>
           </div>
           <hr>
-            <%= f.submit "投稿する", class: "btn btn-block mt-4", style:"color:#FFFFFF; background-color:#696969;" %>
+            <%= f.submit "変更を保存する", class: "btn btn-block mt-4", style:"color:#FFFFFF; background-color:#696969;" %>
         <% end %>
       </div>
   </div>

@@ -13,7 +13,7 @@ class Admin::CategoriesController < ApplicationController
     if @category.save
       redirect_to admin_categories_path
     else
-      flash[:alert] = "入力内容を再度ご確認ください。なお、既にあるカテゴリ名は入力できません。"
+      flash[:alert] = "カテゴリ名を入力してください。なお、既にあるカテゴリ名は入力できません。"
       redirect_to admin_categories_path
     end
 

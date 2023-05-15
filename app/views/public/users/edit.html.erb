@@ -7,6 +7,7 @@
         <div class="mb-3">
         <%= image_tag @user.get_profile_image(200,200), class:"rounded-circle" %>
         </div>
+        <%= render "public/shared/error_messages", resource: @user %>
         <%= form_with model: @user do |f| %>
           <div class="input-group mb-3">
             <h6 class="col-md-12 p-0 text-left">

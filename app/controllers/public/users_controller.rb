@@ -61,7 +61,6 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "プロフィール編集が完了しました。"
       redirect_to user_path(@user)
     else
-      flash.now[:alert] = "入力内容を再度ご確認ください。"
       render :edit
     end
   end

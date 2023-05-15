@@ -156,3 +156,4 @@ ja:
       too_long: "は%{count}文字以下に設定して下さい。"
       invalid: "は有効でありません。"
       confirmation: "が一致しません。"
+      required: "を選択してください。"

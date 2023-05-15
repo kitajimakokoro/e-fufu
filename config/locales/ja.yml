@@ -20,6 +20,11 @@
           engaged: "婚約中"
           married: "既婚"
           others: "その他"
+    activerecord:
+      attributes:
+        post:
+          text: "内容"
+          category: "カテゴリ"
     views:
       pagination: #ページネーションの日本語化(Font使用)
         first: <i class="fas fa-angle-double-left"></i>

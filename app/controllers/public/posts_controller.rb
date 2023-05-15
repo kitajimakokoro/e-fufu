@@ -6,16 +6,17 @@ class Public::PostsController < ApplicationController
     @post = Post.new
   end
 
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)
     else
-      flash.now[:alert] = "入力内容を再度ご確認ください。"
       render :new
     end
   end
+
 
   def index
     @categories = Category.all
@@ -37,12 +38,36 @@ class Public::PostsController < ApplicationController
     @post_comment = PostComment.new #コメント投稿用
   end
 
+
+  def edit
+    @post = Post.find(params[:id])
+      if @post.user == current_user
+        render "edit"
+      else
+        flash[:alert] = "他のユーザーの投稿は編集できません。"
+        redirect_to post_path(@post)
+      end
+  end
+
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:notice] = "投稿を編集しました。"
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
+  end
+
+
   def destroy
     post = Post.find(params[:id])
     post.destroy
     flash[:notice] = "投稿を削除しました。"
     redirect_to posts_path
   end
+
 
   def search
     #入力した検索ワードをparams[:keyword]で取得、presentは存在を問う
@@ -56,6 +81,7 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path
     end
   end
+
 
 
   private
